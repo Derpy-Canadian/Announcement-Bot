@@ -22,20 +22,21 @@ namespace Announcement_Bot_PRW
             eb.WithColor(Color.Blue);
             eb2.WithColor(Color.Red);
             eb.AddField("User Commands", @"
--help == Shows this message
--ping == Shows the bots latency
--optin == Opt into being DM'd for announcements
--optout == Opt out of being DM'd for announcements
--about == Get information on this bot
--whois == Get information on a user
+``-help``  Shows this message
+``-ping``  Shows the bots latency
+``-optin``  Opt into being DM'd for announcements
+``-optout``  Opt out of being DM'd for announcements
+``-about``  Get information on this bot
+``-whois``  Get information on a users
 ");
             eb2.AddField("Staff Commands", @"
--addmodlog == Adds a moderation log to your server. Do not delete this channel. Use -removemodlog
--removemodlog == Removes moderation log from your server. Do this instead of deleting the channel yourself
--announce == Create an announcement with the specified message. Run this in your announcement channel
--ban == Ban the specified user. If no reason is added it will default to reason not set
--kick == Kick the specified user. If no reason is added it will default to reason not set
--testmodlog == Send a test message to your moderation log", true);// These lines of code create the embed for help
+``-addmodlog``  Adds a moderation log to your server. Do not delete this channel. Use -removemodlog
+``-removemodlog``  Removes moderation log from your server. Do this instead of deleting the channel yourself
+``-announce``  Create an announcement with the specified message. Run this in your announcement channel
+``-ban``  Ban the specified user. If no reason is added it will default to reason not set
+``-kick``  Kick the specified user. If no reason is added it will default to reason not set
+``-testmodlog``  Send a test message to your moderation log
+``-prefix`` Change the bot's prefix", true);// These lines of code create the embed for help
 
             // Build the embeds
             var ebb = eb.Build();
@@ -304,11 +305,11 @@ namespace Announcement_Bot_PRW
         {
             // Create the embed
             var eb = new EmbedBuilder();
-            eb.WithTitle("Announcement Bot Beta");
+            eb.WithTitle("Announcement Bot");
             eb.WithCurrentTimestamp();
             eb.WithColor(Color.Blue);
-            eb.AddField("Credits", "Starman#9216 - Idea, and Programming", true);
-            eb.AddField("Version", "2.1", true);
+            eb.AddField("Credits", "Starman#5874 - Idea, and Programming", true);
+            eb.AddField("Version", "3.0", true);
             eb.AddField("Programming Language", "C#", true);
             eb.AddField("Library", "Discord.NET", true);
             eb.AddField("Guilds", Program._client.Guilds.Count, true);

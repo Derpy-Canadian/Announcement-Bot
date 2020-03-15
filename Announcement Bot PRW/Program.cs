@@ -27,7 +27,7 @@ namespace Announcement_Bot_PRW
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string botToken = "TOKENGOESHERE"; // Define the bot token
+            string botToken = "Njg4ODMwNDEzMjYyODE1Mjkz.Xm6BVw.H-hcWX9-_rTtDEXSJ19OBoY_c64"; // Define the bot token
 
             _client.Log += Log; // Set up logging
 
@@ -54,9 +54,11 @@ namespace Announcement_Bot_PRW
         private async Task HandleCommandAsync(SocketMessage arg)
         {
             var message = arg as SocketUserMessage; // Create a variable with the message as SocketUserMessage
+            IGuildChannel chnl = (IGuildChannel)arg.Channel; // Define the current channel
+            var guild = ServerStorage.GetGuild((SocketGuild)chnl.Guild); // Get the data for the current guild
             if (message is null || message.Author.IsBot) return; // Checks if the message is empty or sent by a bot
             int argumentPos = 0; // Sets the argpos to 0 (the start of the message)
-            if (message.HasStringPrefix("-", ref argumentPos) || message.HasMentionPrefix(_client.CurrentUser, ref argumentPos)) // If the message has the prefix at the start or starts with someone mentioning the bot
+            if (message.HasStringPrefix(guild.prefix, ref argumentPos) || message.HasMentionPrefix(_client.CurrentUser, ref argumentPos) || message.HasStringPrefix("ab-", ref argumentPos)) // If the message has the prefix at the start or starts with someone mentioning the bot
             {
                 var context = new SocketCommandContext(_client, message); // Create a variable called context
                 var result = await _commands.ExecuteAsync(context, argumentPos, _services); // Create a veriable called result

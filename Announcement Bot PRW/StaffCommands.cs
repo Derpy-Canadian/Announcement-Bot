@@ -175,5 +175,16 @@ namespace Announcement_Bot_PRW
                 await m.DeleteAsync(); // Delete the purged notification
             }
         }
+
+        [Command("prefix")]
+        [RequireUserPermission(GuildPermission.Administrator)]
+        private async Task Prefix(string prefix)
+        {
+            var guild = ServerStorage.GetGuild(Context.Guild);
+            string oldprefix = guild.prefix;
+            guild.prefix = prefix;
+            await ReplyAsync("Your prefix has been changed from " + oldprefix + " to " + prefix);
+            ServerStorage.SaveGuilds();
+        }
     }
 }
