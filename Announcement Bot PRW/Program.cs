@@ -27,7 +27,7 @@ namespace Announcement_Bot_PRW
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string botToken = "Njg4ODMwNDEzMjYyODE1Mjkz.Xm6BVw.H-hcWX9-_rTtDEXSJ19OBoY_c64"; // Define the bot token
+            string botToken = "TOKEN"; // Define the bot token
 
             _client.Log += Log; // Set up logging
 
