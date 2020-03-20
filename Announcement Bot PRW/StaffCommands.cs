@@ -160,19 +160,19 @@ namespace Announcement_Bot_PRW
         }
 
 
-        [Command("purge", RunMode = RunMode.Async)]
-        [Summary("Deletes the specified amount of messages.")]
+        [Command("purge")]
         [RequireUserPermission(GuildPermission.KickMembers)]
         [RequireBotPermission(ChannelPermission.ManageMessages)]
         public async Task PurgeChat(int amount = 0)
         {
             if (amount != 0)
             {
-                IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(amount + 1).FlattenAsync(); // Get the group of messages to delete
-                await ((ITextChannel)Context.Channel).DeleteMessagesAsync(messages); // Delete the messages stored in the messages IEnumerable
-                IUserMessage m = await ReplyAsync($"Messages purged. This message will be deleted in 3 seconds"); // Notify users about the purge
-                await Task.Delay(3000); // Wait for 3 seconds
-                await m.DeleteAsync(); // Delete the purged notification
+                IEnumerable<IMessage> messages = await Context.Channel.GetMessagesAsync(amount + 1).FlattenAsync();
+                await ((ITextChannel)Context.Channel).DeleteMessagesAsync(messages);
+                const int delay = 3000;
+                IUserMessage m = await ReplyAsync($"Messages purged. This message will be deleted in 3 seconds");
+                await Task.Delay(delay);
+                await m.DeleteAsync();
             }
         }
 

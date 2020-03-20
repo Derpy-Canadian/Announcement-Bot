@@ -28,6 +28,7 @@ namespace Announcement_Bot_PRW
 ``-optout``  Opt out of being DM'd for announcements
 ``-about``  Get information on this bot
 ``-whois``  Get information on a users
+``-suggest``  Send a suggestion to Starman (the bots creator)
 ");
             eb2.AddField("Staff Commands", @"
 ``-addmodlog``  Adds a moderation log to your server. Do not delete this channel. Use -removemodlog
@@ -36,7 +37,8 @@ namespace Announcement_Bot_PRW
 ``-ban``  Ban the specified user. If no reason is added it will default to reason not set
 ``-kick``  Kick the specified user. If no reason is added it will default to reason not set
 ``-testmodlog``  Send a test message to your moderation log
-``-prefix`` Change the bot's prefix", true);// These lines of code create the embed for help
+``-prefix`` Change the bot's prefix
+``-purge``  Delete a select amount of messages", true);// These lines of code create the embed for help
 
             // Build the embeds
             var ebb = eb.Build();
@@ -146,6 +148,7 @@ namespace Announcement_Bot_PRW
                     // Send the error message
                     await ReplyAsync($"An error has ocurred: {e.Message} at {e.Source}");
                 }
+                Reports.report.announcementsSent++;
             }
         }
 
@@ -349,6 +352,23 @@ namespace Announcement_Bot_PRW
 
             // Send the embed
             await ReplyAsync("", false, ebb);
+        }
+
+        [Command("suggest")]
+        private async Task Suggest([Remainder]string suggestion)
+        {
+            if (suggestion.ToLower() != "hey" || suggestion.ToLower() != "hello" || suggestion.ToLower() != "hi")
+            {
+                SocketGuild guild = Program._client.GetGuild(513535156376698882);
+                SocketTextChannel suggestions = guild.TextChannels.FirstOrDefault(x => x.Id == 689884430365753386);
+                var eb = new EmbedBuilder();
+                eb.WithTitle("Suggestion From " + Context.Message.Author);
+                eb.WithCurrentTimestamp();
+                eb.WithColor(Color.Blue);
+                eb.WithDescription(suggestion);
+                await suggestions.SendMessageAsync("", false, eb.Build());
+                await ReplyAsync("Your suggestion has been sent!");
+            }
         }
     }
 }

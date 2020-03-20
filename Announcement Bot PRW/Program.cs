@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace Announcement_Bot_PRW
 {
@@ -27,15 +28,26 @@ namespace Announcement_Bot_PRW
                 .AddSingleton(_commands)
                 .BuildServiceProvider();
 
-            string botToken = "Njg4ODMwNDEzMjYyODE1Mjkz.Xm6BVw.H-hcWX9-_rTtDEXSJ19OBoY_c64"; // Define the bot token
+            string botToken = "TOKENGOESHERE"; // Define the bot token
 
             _client.Log += Log; // Set up logging
+            _client.JoinedGuild += Reports.joinGuild;
+            _client.LeftGuild += Reports.leftGuild;
+            _client.UserJoined += Reports.userJoin;
+            _client.UserLeft += Reports.userLeave;
 
             await RegisterCommandsAsync(); // Call registercommands
 
             await _client.LoginAsync(TokenType.Bot, botToken); // Log into the bot user
 
+            Timer t = new Timer(86400000); // 1 sec = 1000, 60 sec = 60000
+            t.AutoReset = true;
+            t.Elapsed += new System.Timers.ElapsedEventHandler(Reports.t_Elapsed);
+            t.Start();
+
             await _client.StartAsync(); // Start the bot user
+            await _client.SetGameAsync("ab-help"); // Set the bots' game
+
             await Task.Delay(-1); // Delay for -1 to keep the console window opened
         }
 

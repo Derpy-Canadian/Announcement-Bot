@@ -203,11 +203,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\DailyReport.cs" />
     <Compile Include="Data Storage\Data.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Server.cs" />
     <Compile Include="Data Storage\ServerStorage.cs" />
+    <Compile Include="Reports.cs" />
     <Compile Include="StaffCommands.cs" />
     <Compile Include="UndocumentedCommands.cs" />
     <Compile Include="UserCommands.cs" />
